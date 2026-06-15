@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Target, Calendar, Flame } from 'lucide-react';
 import FactCard from '../components/FactCard';
 import { dailyFacts } from '../data/mockData';
 import { useUser } from '../context/UserContext';
 
 const DailyChallengePage = () => {
+  const navigate = useNavigate();
   const { profile } = useUser();
   const fact = dailyFacts[new Date().getDay() % dailyFacts.length];
 
@@ -48,7 +50,7 @@ const DailyChallengePage = () => {
 
       <div className="mt-12 text-center">
         <button 
-          onClick={() => window.location.href='/quiz'}
+          onClick={() => navigate('/quiz')}
           className="btn-primary py-4 px-10 text-lg shadow-xl shadow-tamil-saffron/20"
         >
           Play Daily Quiz

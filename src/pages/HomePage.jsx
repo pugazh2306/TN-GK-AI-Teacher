@@ -1,12 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FactCard from '../components/FactCard';
 import QuizCard from '../components/QuizCard';
 import { dailyFacts } from '../data/mockData';
 import { PlayCircle, Compass } from 'lucide-react';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const randomFact = dailyFacts[Math.floor(Math.random() * dailyFacts.length)];
 
   return (
@@ -67,19 +68,19 @@ const HomePage = () => {
           title="Chola Dynasty" 
           description="Test your knowledge on the great Chola kings, architecture, and their naval empire."
           questionsCount={10}
-          onStart={() => window.location.href='/quiz?topic=Chola%20Dynasty'}
+          onStart={() => navigate('/quiz?topic=Chola%20Dynasty')}
         />
         <QuizCard 
           title="Tamil Literature" 
           description="Explore Sangam literature, Thirukkural, and epics like Silappatikaram."
           questionsCount={10}
-          onStart={() => window.location.href='/quiz?topic=Tamil%20Literature'}
+          onStart={() => navigate('/quiz?topic=Tamil%20Literature')}
         />
         <QuizCard 
           title="Geography & Rivers" 
           description="Learn about the Western Ghats, Kaveri river, and important geographical landmarks."
           questionsCount={10}
-          onStart={() => window.location.href='/quiz?topic=Geography'}
+          onStart={() => navigate('/quiz?topic=Geography')}
         />
       </section>
     </div>

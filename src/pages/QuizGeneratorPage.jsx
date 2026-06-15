@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Bot, Loader2, CheckCircle2, XCircle, Timer, AlertCircle, Trophy } from 'lucide-react';
 import { useUser } from '../context/UserContext';
 
@@ -27,6 +27,7 @@ const MOCK_QUESTIONS = [
 
 const QuizGeneratorPage = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const initialTopic = searchParams.get('topic') || '';
   
   const { recordQuiz } = useUser();
@@ -191,7 +192,7 @@ const QuizGeneratorPage = () => {
             <button onClick={() => setQuizState('idle')} className="btn-secondary py-3 px-6">
               Generate Another
             </button>
-            <button onClick={() => window.location.href='/profile'} className="btn-primary py-3 px-6">
+            <button onClick={() => navigate('/profile')} className="btn-primary py-3 px-6">
               View Profile
             </button>
           </div>
