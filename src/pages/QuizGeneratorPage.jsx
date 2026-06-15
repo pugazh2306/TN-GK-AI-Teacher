@@ -4,26 +4,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Bot, Loader2, CheckCircle2, XCircle, Timer, AlertCircle, Trophy } from 'lucide-react';
 import { useUser } from '../context/UserContext';
 
-const MOCK_QUESTIONS = [
-  {
-    q: "Who is known as the builder of the Kallanai dam?",
-    options: ["Raja Raja Chola", "Karikala Chola", "Rajendra Chola", "Kulothunga Chola"],
-    answer: 1,
-    explanation: "Kallanai is an ancient dam built by Karikala of the Chola dynasty in the 2nd century AD."
-  },
-  {
-    q: "Which city is known as the 'Manchester of South India'?",
-    options: ["Madurai", "Chennai", "Coimbatore", "Salem"],
-    answer: 2,
-    explanation: "Coimbatore is called the Manchester of South India due to its extensive textile industry."
-  },
-  {
-    q: "The classical dance form Bharatanatyam originated in which state?",
-    options: ["Kerala", "Karnataka", "Andhra Pradesh", "Tamil Nadu"],
-    answer: 3,
-    explanation: "Bharatanatyam is one of the oldest classical dance traditions in India, originating in Tamil Nadu."
-  }
-];
+import { topicQuizzes } from '../data/quizData';
 
 const QuizGeneratorPage = () => {
   const [searchParams] = useSearchParams();
@@ -48,8 +29,9 @@ const QuizGeneratorPage = () => {
     // Simulate AI generation delay
     setTimeout(() => {
       // In a real app, this would call an AI API with the 'topic'
-      // Here we just use mock questions and pretend they are generated for the topic
-      const generated = MOCK_QUESTIONS.map(q => ({...q})); 
+      // Use topic specific mock questions, fallback to General
+      const sourceQuestions = topicQuizzes[topic] || topicQuizzes["General"];
+      const generated = sourceQuestions.map(q => ({...q})); 
       setQuestions(generated);
       setIsGenerating(false);
       setQuizState('playing');
